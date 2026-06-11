@@ -1,0 +1,140 @@
+# Default dark theme for 800x480 AX206 panels.
+# CPU & GPU temperature arcs, RAM bar, net sparklines, clock.
+
+name: default
+size: [800, 480]
+background: "#0d1117"
+
+defaults:
+  font: "Segoe UI"
+  font_size: 24
+  color: "#e6edf3"
+
+widgets:
+  # ---- clock -----------------------------------------------------------
+  - type: text
+    pos: [400, 14]
+    text: "%H:%M:%S"
+    font: "Segoe UI Light"
+    font_size: 64
+    anchor: "ma"
+
+  - type: text
+    pos: [400, 96]
+    text: "%a %d %b %Y"
+    font_size: 20
+    color: "#8b949e"
+    anchor: "ma"
+
+  # ---- CPU (left gauge) ------------------------------------------------
+  - type: text
+    pos: [150, 140]
+    text: "CPU"
+    font_size: 22
+    color: "#8b949e"
+    anchor: "mm"
+
+  - type: gauge
+    pos: [60, 150]
+    size: 180
+    sensor: cpu.temp
+    min: 30
+    max: 100
+    color: "#3fb950"
+    format: "{:.0f}°"
+    font_size: 44
+
+  - type: text
+    pos: [150, 344]
+    sensor: cpu.load
+    format: "{:.0f}% load"
+    font_size: 18
+    color: "#8b949e"
+    anchor: "mm"
+
+  # ---- GPU (right gauge) -----------------------------------------------
+  - type: text
+    pos: [650, 140]
+    text: "GPU"
+    font_size: 22
+    color: "#8b949e"
+    anchor: "mm"
+
+  - type: gauge
+    pos: [560, 150]
+    size: 180
+    sensor: gpu.temp
+    min: 30
+    max: 100
+    color: "#f0883e"
+    format: "{:.0f}°"
+    font_size: 44
+
+  - type: text
+    pos: [650, 344]
+    sensor: gpu.load
+    format: "{:.0f}% load"
+    font_size: 18
+    color: "#8b949e"
+    anchor: "mm"
+
+  # ---- RAM / disk (center column) ---------------------------------------
+  - type: text
+    pos: [400, 160]
+    text: "RAM"
+    font_size: 22
+    color: "#8b949e"
+    anchor: "mm"
+
+  - type: bar
+    pos: [320, 180]
+    size: [160, 20]
+    sensor: ram.percent
+    color: "#58a6ff"
+
+  - type: text
+    pos: [400, 226]
+    sensor: ram.used_gb
+    format: "{:.1f} GB used"
+    font_size: 18
+    color: "#8b949e"
+    anchor: "mm"
+
+  - type: text
+    pos: [400, 290]
+    sensor: disk.used_percent
+    format: "DISK {:.0f}%"
+    font_size: 18
+    color: "#8b949e"
+    anchor: "mm"
+
+  # ---- network (bottom sparklines) ---------------------------------------
+  - type: text
+    pos: [60, 366]
+    sensor: net.down_mbps
+    format: "↓ {:.1f} Mb/s"
+    font_size: 18
+    color: "#39c5cf"
+
+  - type: sparkline
+    pos: [60, 396]
+    size: [310, 66]
+    sensor: net.down_mbps
+    max: auto
+    color: "#39c5cf"
+    bg_color: "#161b22"
+
+  - type: text
+    pos: [430, 366]
+    sensor: net.up_mbps
+    format: "↑ {:.1f} Mb/s"
+    font_size: 18
+    color: "#bc8cff"
+
+  - type: sparkline
+    pos: [430, 396]
+    size: [310, 66]
+    sensor: net.up_mbps
+    max: auto
+    color: "#bc8cff"
+    bg_color: "#161b22"
